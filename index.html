@@ -4,11 +4,30 @@
 
 <body>
 
-	
+Level <span id="level">1</span>
+<br>
+Damage: <span id="damage">1</span>
+&emsp;
+Health: <span id="health">100</span>
+&emsp;
+Experience: <span id="exp_num">0</span>/<span id="exp_dem">10</span>
+<br>
+Gold: <span id="gold">0</span>
+<br>
+<button onclick="deal_damage()"> Attack </button>
+<br><br>
 
-<button type="button" onclick="replace()"> Do something </button>
-<p id="test"> hi </p>
+Enemy Level: <span id="enemy_level">1</span>
+<br>
+<button id="enemy_lvl_up_button" onclick="enemy_lvl_up()" disabled="true"> Level up enemy </button>
+&ensp;
+Cost: <span id="lvl_up_cost">10</span> gold
+<br>
+Enemy Health: <span id="enemy_health">10</span>
+<br>
+<button onclick="debug_mode()"> Debug Mode </button>
 
-<script type="text/javascript" src="main.js></script>
+<script type="text/javascript" src="main.js"></script>
+
 </body>
 </html>
