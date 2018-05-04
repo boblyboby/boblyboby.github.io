@@ -8,6 +8,7 @@
 	<button class="tablinks" onclick="openTab(event, 'main')">Main</button>
 	<button class="tablinks" onclick="openTab(event, 'shop')">Shop</button>
 	<button class="tablinks" onclick="openTab(event, 'debug')">Debug</button>
+	<button calss="tablinks" onclick="openTab(event, 'save_load')">Save/Load</button>
 </div>
 
 <div id="main" class="tabcontent">
@@ -40,6 +41,11 @@
 
 <div id="debug" class="tabcontent">
 	<button onclick="debug_mode()"> Debug Mode </button>
+</div>
+
+<div id="save_load" class="tabcontent">
+	<button onclick="save()"> Save </button>
+	<button onclick="load()"> Load </button>
 </div>
 
 <script type="text/javascript" src="main.js"></script>
