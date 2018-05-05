@@ -19,13 +19,11 @@ function save(){
 		exp_num: exp_num,
 		exp_dem: exp_dem,
 		level: level,
-		enemy_level: enemy_level,
 		exp_amt: exp_amt,
 		gold: gold,
 		enemy_gold: enemy_gold,
 		enemy_health: enemy_health,
-		enemy_max_health: enemy_max_health,
-		lvl_up_cost: lvl_up_cost
+		enemy_max_health: enemy_max_health
 	}
 	localStorage.setItem("save", JSON.stringify(save));
 }
@@ -36,13 +34,11 @@ function load(){
 	if (typeof savegame.exp_num !== "undefined") exp_num = savegame.exp_num;
 	if (typeof savegame.exp_dem !== "undefined") exp_dem = savegame.exp_dem;
 	if (typeof savegame.level !== "undefined") level = savegame.level;
-	if (typeof savegame.enemy_level !== "undefined") enemy_level = savegame.enemy_level;
 	if (typeof savegame.exp_amt !== "undefined") exp_amt = savegame.exp_amt;
 	if (typeof savegame.gold !== "undefined") gold = savegame.gold;
 	if (typeof savegame.enemy_gold !== "undefined") enemy_gold = savegame.enemy_gold;
 	if (typeof savegame.enemy_health !== "undefined") enemy_health = savegame.enemy_health;
 	if (typeof savegame.enemy_max_health !== "undefined") enemy_max_health = savegame.enemy_max_health;
-	if (typeof savegame.lvl_up_cost !== "undefined") lvl_up_cost = savegame.lvl_up_cost;
 	update_stats();
 }
 
@@ -135,7 +131,7 @@ function mushroom(){
 		enemy_health = 25;
 	}
 	document.getElementById("enemy_name").innerHTML = "Mushroom";
-	enemy_max_health = 10;
+	enemy_max_health = 25;
 	enemy_gold = 2;
 	exp_amt = 2;
 	update_stats();

@@ -8,7 +8,7 @@
 	<button class="tablinks" onclick="openTab(event, 'main')">Main</button>
 	<button class="tablinks" onclick="openTab(event, 'shop')">Shop</button>
 	<button class="tablinks" onclick="openTab(event, 'debug')">Debug</button>
-	<button calss="tablinks" onclick="openTab(event, 'save_load')">Save/Load</button>
+	<button class="tablinks" onclick="openTab(event, 'save_load')">Save/Load</button>
 </div>
 
 <div id="main" class="tabcontent">
@@ -22,14 +22,14 @@
 	<br>
 	Gold: <span id="gold">0</span>
 	<br>
-	<button onclick="deal_damage()" class="attbtn"> Attack </button>
+	<button onclick="deal_damage()" class="atkbtn"> Attack </button>
 	<br><br>
 
 	<div class="dropdown">
 		<button id="enemy_name" onclick="openDropdown()" class="dropbtn">Slime</button>
 		<div id="myDropdown" class="dropdown-content">
-			<button onclick="slime()">Slime</button>
-			<button onclick="mushroom()">Mushroom</button>
+			<button onclick="slime()" class="dropdown-button">Slime</button>
+			<button onclick="mushroom()" class="dropdown-button">Mushroom</button>
 		</div>
 	</div>
 	&ensp;

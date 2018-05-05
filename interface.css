@@ -12,6 +12,8 @@
 	cursor: pointer;
 	padding: 14px 16px;
 	transition: 0.3s;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 1em;
 }
 
 .tab button:hover {
@@ -33,14 +35,16 @@
 	background-color: #FFFFFF;
 	color: black;
 	padding: 2px 10px;
-	font-size: 12px;
+	font-size: 1em;
 	min-width: 102px;
 	border: 1px solid black;
 	cursor: pointer;
+	font-family: "Times New Roman", Times, serif;
 }
 
 .dropbtn:hover, .dropbtn:focus {
 	background-color: #BCBCBC;
+	outline: none;
 }
 
 .dropdown {
@@ -54,31 +58,49 @@
 	background-color: #ffffff;
 	min-width: 70px;
 	/*box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);*/
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	/*border-bottom: 0px solid black;*/
 	z-index: 1;
 }
 
 .dropdown-content button {
 	color: black;
 	padding: 4px 20px;
-	min-width: 100px;
+	min-width: 102px;
 	text-decoration: none;
-	border: none;
+	border: 1px solid black;
 	display: block;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 0.8em;
+	border-top: none;
 }
 
 .dropdown-content button:hover {
 	background-color: #ddd;
 }
 
+.dropdown-content button:focus {
+	outline: none;
+}
+
 .show {
 	display: block;
 }
 
-.attbtn {
-	background-color: #FFFFFF;
+.atkbtn {
 	border: 1px solid black;
-	
+	padding: 2px 10px;
+	min-width: 102px;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 1em;
+}
+
+.atkbtn:hover {
+	background-color: #bcbcbc;
+}
+
+.atkbtn:focus {
+	outline: none;
 }
 
 table, th, td {
