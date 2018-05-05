@@ -22,16 +22,18 @@
 	<br>
 	Gold: <span id="gold">0</span>
 	<br>
-	<button onclick="deal_damage()"> Attack </button>
+	<button onclick="deal_damage()" class="attbtn"> Attack </button>
 	<br><br>
 
-	Enemy Level: <span id="enemy_level">1</span>
-	<br>
-	<button id="enemy_lvl_up_button" onclick="enemy_lvl_up()" disabled="true"> Level up enemy </button>
+	<div class="dropdown">
+		<button id="enemy_name" onclick="openDropdown()" class="dropbtn">Slime</button>
+		<div id="myDropdown" class="dropdown-content">
+			<button onclick="slime()">Slime</button>
+			<button onclick="mushroom()">Mushroom</button>
+		</div>
+	</div>
 	&ensp;
-	Cost: <span id="lvl_up_cost">10</span> gold
-	<br>
-	Enemy Health: <span id="enemy_health">10</span>
+	Health: <span id="enemy_health">10</span>
 	<br>
 </div>
 

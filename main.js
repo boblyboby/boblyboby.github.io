@@ -2,13 +2,11 @@ var damage = 1;
 var exp_num = 0;
 var exp_dem = 10;
 var level = 1;
-var enemy_level = 1;
 var exp_amt = 1;
 var gold = 0;
 var enemy_gold = 1;
 var enemy_health = 10;
 var enemy_max_health = 10;
-var lvl_up_cost = 10;
 
 function debug_mode(){
 	damage = 100;
@@ -48,6 +46,23 @@ function load(){
 	update_stats();
 }
 
+function openDropdown(){
+	document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event){
+	if (!event.target.matches('.dropbtn')){
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i=0; i<dropdowns.length; i++){
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains("show")){
+				openDropdown.classList.remove("show");
+			}
+		}
+	}
+}
+
 function enemy_lvl_up(){
 	enemy_level += 1;
 	enemy_gold = enemy_level;
@@ -65,16 +80,7 @@ function update_stats(){
 	document.getElementById("damage").innerHTML = damage;
 	document.getElementById("exp_num").innerHTML = exp_num;
 	document.getElementById("enemy_health").innerHTML = enemy_health;
-	document.getElementById("enemy_level").innerHTML = enemy_level;
-	document.getElementById("enemy_health").innerHTML = enemy_health;
 	document.getElementById("gold").innerHTML = gold;
-	document.getElementById("lvl_up_cost").innerHTML = lvl_up_cost;
-	if(gold >= lvl_up_cost){
-		document.getElementById("enemy_lvl_up_button").disabled = false;
-	}
-	else{
-		document.getElementById("enemy_lvl_up_button").disabled = true;
-	}
 }
 
 function openTab(event, tabName){
@@ -108,5 +114,29 @@ function deal_damage(){
 			exp_dem = Math.floor(exp_dem * (1 + level * 0.1));
 			damage = damage + level - 1;
 	}
+	update_stats();
+}
+
+function slime(){
+	var name = document.getElementById("enemy_name").innerHTML;
+	if(name != "Slime"){
+		enemy_health = 10;
+	}
+	document.getElementById("enemy_name").innerHTML = "Slime";
+	enemy_max_health = 10;
+	enemy_gold = 1;
+	exp_amt = 1;
+	update_stats();
+}
+
+function mushroom(){
+	var name = document.getElementById("enemy_name").innerHTML;
+	if(name != "Mushroom"){
+		enemy_health = 25;
+	}
+	document.getElementById("enemy_name").innerHTML = "Mushroom";
+	enemy_max_health = 10;
+	enemy_gold = 2;
+	exp_amt = 2;
 	update_stats();
 }
