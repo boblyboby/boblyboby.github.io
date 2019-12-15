@@ -8,8 +8,20 @@ var enemy_gold = 1;
 var enemy_health = 10;
 var enemy_max_health = 10;
 
+class player {
+	constructor(damage, exp_num, exp_dem, level) {
+		this.damage = damage;
+		this.exp_num = exp_num;
+		this.exp_dem = exp_dem;
+		this.level = level;
+	}
+}
+
+p = new player(1, 0, 10, 1);
+console.log(p.damage);
+
 function debug_mode(){
-	damage = 100;
+	damage = damage + 100;
 	document.getElementById("damage").innerHTML = damage;
 }
 
@@ -40,6 +52,20 @@ function load(){
 	if (typeof savegame.enemy_health !== "undefined") enemy_health = savegame.enemy_health;
 	if (typeof savegame.enemy_max_health !== "undefined") enemy_max_health = savegame.enemy_max_health;
 	update_stats();
+}
+
+function reset(){
+	damage = 1;
+	exp_num = 0;
+	exp_dem = 10;
+	level = 1;
+	exp_amt = 1;
+	gold = 0;
+	enemy_gold = 1;
+	enemy_health = 10;
+	enemy_max_health = 10;
+	update_stats();
+	save();
 }
 
 function openDropdown(){
