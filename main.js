@@ -1,12 +1,4 @@
-var damage = 1;
-var exp_num = 0;
-var exp_dem = 10;
-var level = 1;
-var exp_amt = 1;
 var gold = 0;
-var enemy_gold = 1;
-var enemy_health = 10;
-var enemy_max_health = 10;
 
 class player {
 	constructor(damage, exp_num, exp_dem, level) {
@@ -17,53 +9,57 @@ class player {
 	}
 }
 
+class enemy {
+	constructor(exp_amt, gold, max_health) {
+		this.exp_amt = exp_amt;
+		this.gold = gold;
+		this.health = max_health;
+		this.max_health = max_health;
+	}
+}
+
 p = new player(1, 0, 10, 1);
-console.log(p.damage);
+e = new enemy(1, 1, 10);
 
 function debug_mode(){
-	damage = damage + 100;
-	document.getElementById("damage").innerHTML = damage;
+	p.damage = p.damage + 100;
+	document.getElementById("damage").innerHTML = p.damage;
 }
 
 function save(){
 	var save = {
-		damage: damage,
-		exp_num: exp_num,
-		exp_dem: exp_dem,
-		level: level,
-		exp_amt: exp_amt,
+		damage: p.damage,
+		exp_num: p.exp_num,
+		exp_dem: p.exp_dem,
+		level: p.level,
+		exp_amt: e.exp_amt,
 		gold: gold,
-		enemy_gold: enemy_gold,
-		enemy_health: enemy_health,
-		enemy_max_health: enemy_max_health
+		enemy_gold: e.gold,
+		enemy_health: e.health,
+		enemy_max_health: e.max_health
 	}
 	localStorage.setItem("save", JSON.stringify(save));
 }
 
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("save"));
-	if (typeof savegame.damage !== "undefined") damage = savegame.damage;
-	if (typeof savegame.exp_num !== "undefined") exp_num = savegame.exp_num;
-	if (typeof savegame.exp_dem !== "undefined") exp_dem = savegame.exp_dem;
-	if (typeof savegame.level !== "undefined") level = savegame.level;
-	if (typeof savegame.exp_amt !== "undefined") exp_amt = savegame.exp_amt;
+	if (typeof savegame.damage !== "undefined") p.damage = savegame.damage;
+	if (typeof savegame.exp_num !== "undefined") p.exp_num = savegame.exp_num;
+	if (typeof savegame.exp_dem !== "undefined") p.exp_dem = savegame.exp_dem;
+	if (typeof savegame.level !== "undefined") p.level = savegame.level;
+	if (typeof savegame.exp_amt !== "undefined") e.exp_amt = savegame.exp_amt;
 	if (typeof savegame.gold !== "undefined") gold = savegame.gold;
-	if (typeof savegame.enemy_gold !== "undefined") enemy_gold = savegame.enemy_gold;
-	if (typeof savegame.enemy_health !== "undefined") enemy_health = savegame.enemy_health;
-	if (typeof savegame.enemy_max_health !== "undefined") enemy_max_health = savegame.enemy_max_health;
+	if (typeof savegame.enemy_gold !== "undefined") e.gold = savegame.enemy_gold;
+	if (typeof savegame.enemy_health !== "undefined") e.health = savegame.enemy_health;
+	if (typeof savegame.enemy_max_health !== "undefined") e.max_health = savegame.enemy_max_health;
 	update_stats();
 }
 
 function reset(){
-	damage = 1;
-	exp_num = 0;
-	exp_dem = 10;
-	level = 1;
-	exp_amt = 1;
-	gold = 0;
-	enemy_gold = 1;
-	enemy_health = 10;
-	enemy_max_health = 10;
+	delete p;
+	delete e;
+	p = new player(1, 0, 10, 1);
+	e = new enemy(1, 1, 10);
 	update_stats();
 	save();
 }
@@ -97,11 +93,11 @@ function enemy_lvl_up(){
 }
 
 function update_stats(){
-	document.getElementById("level").innerHTML = level;
-	document.getElementById("exp_dem").innerHTML = exp_dem;
-	document.getElementById("damage").innerHTML = damage;
-	document.getElementById("exp_num").innerHTML = exp_num;
-	document.getElementById("enemy_health").innerHTML = enemy_health;
+	document.getElementById("level").innerHTML = p.level;
+	document.getElementById("exp_dem").innerHTML = p.exp_dem;
+	document.getElementById("damage").innerHTML = p.damage;
+	document.getElementById("exp_num").innerHTML = p.exp_num;
+	document.getElementById("enemy_health").innerHTML = e.health;
 	document.getElementById("gold").innerHTML = gold;
 }
 
@@ -115,26 +111,26 @@ function openTab(event, tabName){
 
 	tablinks = document.getElementsByClassName("tablinks");
 	for(i=0; i<tablinks.length; i++){
-		tablinks[i].className = tablinks[i].className.replace("active", "");
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
 	}
 
 	document.getElementById(tabName).style.display = "block";
-	event.currentTarget.className += "active";
+	event.currentTarget.className += " active";
 }
 
 function deal_damage(){
-	enemy_health -= damage;
-	if(enemy_health <= 0){		// Enemy Kill
-		exp_num += exp_amt;
-		gold += enemy_gold;
-		enemy_health = enemy_max_health;
+	e.health -= p.damage;
+	if(e.health <= 0){		// Enemy Kill
+		p.exp_num += e.exp_amt;
+		gold += e.gold;
+		e.health = e.max_health;
 	}
 	
-	if(exp_num >= exp_dem){		// Level Up
-			exp_num = 0;
-			level += 1;
-			exp_dem = Math.floor(exp_dem * (1 + level * 0.1));
-			damage = damage + level - 1;
+	if(p.exp_num >= p.exp_dem){		// Level Up
+			p.exp_num = p.exp_num - p.exp_dem;
+			p.level += 1;
+			p.exp_dem = Math.floor(p.exp_dem * (1 + p.level * 0.1));
+			p.damage = p.damage + p.level - 1;
 	}
 	update_stats();
 }
@@ -142,23 +138,23 @@ function deal_damage(){
 function slime(){
 	var name = document.getElementById("enemy_name").innerHTML;
 	if(name != "Slime"){
-		enemy_health = 10;
+		e.health = 10;
 	}
 	document.getElementById("enemy_name").innerHTML = "Slime";
-	enemy_max_health = 10;
-	enemy_gold = 1;
-	exp_amt = 1;
+	e.max_health = 10;
+	e.gold = 1;
+	e.exp_amt = 1;
 	update_stats();
 }
 
 function mushroom(){
 	var name = document.getElementById("enemy_name").innerHTML;
 	if(name != "Mushroom"){
-		enemy_health = 25;
+		e.health = 25;
 	}
 	document.getElementById("enemy_name").innerHTML = "Mushroom";
-	enemy_max_health = 25;
-	enemy_gold = 2;
-	exp_amt = 2;
+	e.max_health = 25;
+	e.gold = 2;
+	e.exp_amt = 2;
 	update_stats();
 }
